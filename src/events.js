@@ -26,8 +26,10 @@ export function onAddPoint(event) {
   }
   // We were drawing a rect, so we don't perform the canonical action and we stop here
   if (this.rectDrawing && this.rectDrawEnd !== null) {
-    map.fire('as:dragging-rect-end');
-    return;
+    // 修复鼠标抖动导致选择一个很小的区域
+    this.draggingRect.removeFrom(this._map);  // 删除已经绘画的矩形
+    // map.fire('as:dragging-rect-end');
+    // return;
   }
 
   const { index = null } = event;
